@@ -1,11 +1,21 @@
 """This file should have our melon-type classes in it."""
 
-class Melon(object):
+class AbstractOrder(object):
+
+    def __init__(self):
+        """When users attempt to instantiate from AbstractOrder,
+        give them an informational error message.
+        """
+        raise Exception("Cannot create a melon from this class!")
+
     def get_base_price(self):
         return 5.00
 
+    # def get_price(self, qty):
+    #     raise AttributeError("Can't get price of non-existent melon")
 
-class WatermelonOrder(Melon):
+
+class WatermelonOrder(AbstractOrder):
     species = "Watermelon"
     color = "green"
     imported = False
@@ -28,7 +38,7 @@ class WatermelonOrder(Melon):
 
         return total_cost
 
-class CantaloupeOrder(Melon):
+class CantaloupeOrder(AbstractOrder):
     species = "Cantaloupe"
     color = "tan"
     imported = False
@@ -51,7 +61,7 @@ class CantaloupeOrder(Melon):
 
         return total_cost
 
-class CasabaOrder(Melon):
+class CasabaOrder(AbstractOrder):
     species = "Casaba"
     color = "green"
     imported = True
@@ -72,7 +82,7 @@ class CasabaOrder(Melon):
 
         return total_cost
 
-class SharlynOrder(Melon):
+class SharlynOrder(AbstractOrder):
     species = "Sharlyn"
     color = "tan"
     imported = True
@@ -92,7 +102,7 @@ class SharlynOrder(Melon):
 
         return total_cost
 
-class SantaClausOrder(Melon):
+class SantaClausOrder(AbstractOrder):
     species = "Santa Claus"
     color = "green"
     imported = True
@@ -112,7 +122,7 @@ class SantaClausOrder(Melon):
 
         return total_cost
 
-class ChristmasOrder(Melon):
+class ChristmasOrder(AbstractOrder):
     species = "Christmas"
     color = "green"
     imported = False
@@ -132,7 +142,7 @@ class ChristmasOrder(Melon):
 
         return total_cost
 
-class HornedMelonOrder(Melon):
+class HornedMelonOrder(AbstractOrder):
     species = "Horned Melon"
     color = "yellow"
     imported = True
@@ -152,7 +162,7 @@ class HornedMelonOrder(Melon):
 
         return total_cost
 
-class XiguaOrder(Melon):
+class XiguaOrder(AbstractOrder):
     species = "Xigua"
     color = "black"
     imported = True
@@ -172,7 +182,7 @@ class XiguaOrder(Melon):
 
         return total_cost
 
-class OgenOrder(Melon):
+class OgenOrder(AbstractOrder):
     species = "Ogen"
     color = "tan"
     imported = False
