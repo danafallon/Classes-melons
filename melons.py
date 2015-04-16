@@ -11,8 +11,18 @@ class AbstractOrder(object):
     def get_base_price(self):
         return 5.00
 
-    # def get_price(self, qty):
-    #     raise AttributeError("Can't get price of non-existent melon")
+    def get_price(self, qty):
+        base_cost = self.get_base_price()
+        if self.price_bump != 0:
+            base_cost += self.price_bump
+        if self.imported == True:
+            base_cost = base_cost * 1.5
+        if self.shape == 'square':
+            base_cost = base_cost * 2
+        
+        total_cost = base_cost * qty
+
+        return total_cost
 
 
 class WatermelonOrder(AbstractOrder):
@@ -21,22 +31,19 @@ class WatermelonOrder(AbstractOrder):
     imported = False
     shape = 'natural'
     seasons = ['Fall', 'Summer']
+    price_bump = 0
+
+    def __init__(self):
+        pass
 
     def get_price(self, qty):
         """Calculate price, given a number of melons ordered."""
 
-        base_cost = self.get_base_price()
-        if self.imported == True:
-            base_cost = base_cost * 1.5
-        if self.shape == 'square':
-            base_cost = base_cost * 2
-        
-        total_cost = base_cost * qty
-
+        total_cost = super(WatermelonOrder, self).get_price(qty)
         if qty > 2:
             total_cost = total_cost * .75
-
         return total_cost
+
 
 class CantaloupeOrder(AbstractOrder):
     species = "Cantaloupe"
@@ -44,22 +51,19 @@ class CantaloupeOrder(AbstractOrder):
     imported = False
     shape = 'natural'
     seasons = ['Spring', 'Summer']
+    price_bump = 0
+
+    def __init__(self):
+        pass
 
     def get_price(self, qty):
         """Calculate price, given a number of melons ordered."""
 
-        base_cost = self.get_base_price()
-        if self.imported == True:
-            base_cost = base_cost * 1.5
-        if self.shape == 'square':
-            base_cost = base_cost * 2
-
-        total_cost = base_cost * qty
-
+        total_cost = super(CantaloupeOrder, self).get_price(qty)
         if qty > 4:
             total_cost = total_cost * .5
-
         return total_cost
+
 
 class CasabaOrder(AbstractOrder):
     species = "Casaba"
@@ -67,20 +71,11 @@ class CasabaOrder(AbstractOrder):
     imported = True
     shape = 'natural'
     seasons = ['Spring', 'Summer', 'Fall', 'Winter']
+    price_bump = 1
 
-    def get_price(self, qty):
-        """Calculate price, given a number of melons ordered."""
+    def __init__(self):
+        pass
 
-        base_cost = self.get_base_price()
-        base_cost += 1
-        if self.imported == True:
-            base_cost = base_cost * 1.5
-        if self.shape == 'square':
-            base_cost = base_cost * 2
-        
-        total_cost = base_cost * qty
-
-        return total_cost
 
 class SharlynOrder(AbstractOrder):
     species = "Sharlyn"
@@ -88,19 +83,11 @@ class SharlynOrder(AbstractOrder):
     imported = True
     shape = 'natural'
     seasons = ['Summer']
+    price_bump = 0
 
-    def get_price(self, qty):
-        """Calculate price, given a number of melons ordered."""
+    def __init__(self):
+        pass
 
-        base_cost = self.get_base_price()
-        if self.imported == True:
-            base_cost = base_cost * 1.5
-        if self.shape == 'square':
-            base_cost = base_cost * 2
-        
-        total_cost = base_cost * qty
-
-        return total_cost
 
 class SantaClausOrder(AbstractOrder):
     species = "Santa Claus"
@@ -108,19 +95,11 @@ class SantaClausOrder(AbstractOrder):
     imported = True
     shape = 'natural'
     seasons = ['Winter', 'Spring']
+    price_bump = 0
 
-    def get_price(self, qty):
-        """Calculate price, given a number of melons ordered."""
+    def __init__(self):
+        pass
 
-        base_cost = self.get_base_price()
-        if self.imported == True:
-            base_cost = base_cost * 1.5
-        if self.shape == 'square':
-            base_cost = base_cost * 2
-        
-        total_cost = base_cost * qty
-
-        return total_cost
 
 class ChristmasOrder(AbstractOrder):
     species = "Christmas"
@@ -128,19 +107,11 @@ class ChristmasOrder(AbstractOrder):
     imported = False
     shape = 'natural'
     seasons = ['Winter']
+    price_bump = 0
 
-    def get_price(self, qty):
-        """Calculate price, given a number of melons ordered."""
+    def __init__(self):
+        pass
 
-        base_cost = self.get_base_price()
-        if self.imported == True:
-            base_cost = base_cost * 1.5
-        if self.shape == 'square':
-            base_cost = base_cost * 2
-        
-        total_cost = base_cost * qty
-
-        return total_cost
 
 class HornedMelonOrder(AbstractOrder):
     species = "Horned Melon"
@@ -148,19 +119,11 @@ class HornedMelonOrder(AbstractOrder):
     imported = True
     shape = 'natural'
     seasons = ['Summer']
+    price_bump = 0
 
-    def get_price(self, qty):
-        """Calculate price, given a number of melons ordered."""
+    def __init__(self):
+        pass
 
-        base_cost = self.get_base_price()
-        if self.imported == True:
-            base_cost = base_cost * 1.5
-        if self.shape == 'square':
-            base_cost = base_cost * 2
-        
-        total_cost = base_cost * qty
-
-        return total_cost
 
 class XiguaOrder(AbstractOrder):
     species = "Xigua"
@@ -168,19 +131,11 @@ class XiguaOrder(AbstractOrder):
     imported = True
     shape = 'square'
     seasons = ['Summer']
+    price_bump = 0
 
-    def get_price(self, qty):
-        """Calculate price, given a number of melons ordered."""
+    def __init__(self):
+        pass
 
-        base_cost = self.get_base_price()
-        if self.imported == True:
-            base_cost = base_cost * 1.5
-        if self.shape == 'square':
-            base_cost = base_cost * 2
-        
-        total_cost = base_cost * qty
-
-        return total_cost
 
 class OgenOrder(AbstractOrder):
     species = "Ogen"
@@ -188,17 +143,7 @@ class OgenOrder(AbstractOrder):
     imported = False
     shape = 'natural'
     seasons = ['Spring', 'Summer']
+    price_bump = 1
 
-    def get_price(self, qty):
-        """Calculate price, given a number of melons ordered."""
-
-        base_cost = self.get_base_price()
-        base_cost += 1
-        if self.imported == True:
-            base_cost = base_cost * 1.5
-        if self.shape == 'square':
-            base_cost = base_cost * 2
-        
-        total_cost = base_cost * qty
-
-        return total_cost
+    def __init__(self):
+        pass
