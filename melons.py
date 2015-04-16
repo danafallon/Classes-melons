@@ -1,4 +1,7 @@
 """This file should have our melon-type classes in it."""
+import datetime
+
+current_month = datetime.datetime.now().strftime("%m")
 
 class AbstractOrder(object):
 
@@ -23,6 +26,31 @@ class AbstractOrder(object):
         total_cost = base_cost * qty
 
         return total_cost
+
+    def is_available(self, month=current_month):
+        month = int(month)
+        if month < 0 or month > 12:
+            raise IndexError("Please use a valid month number")
+        elif month < 4:
+            season = 'Winter'
+        elif month < 7:
+            season = 'Spring'
+        elif month < 10:
+            season = 'Summer'
+        else:
+            season = 'Fall'
+
+        if season in self.seasons:
+            if month == int(current_month):
+                return "This melon is available now."
+            else:
+                return "This melon will be available in that month."
+        else:
+            if month == int(current_month):
+                return "This melon is not available now."
+            else:
+                return "This melon will not be available in that month."
+
 
 
 class WatermelonOrder(AbstractOrder):
